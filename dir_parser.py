@@ -17,14 +17,8 @@ def dir_parser(directory=None):
     for root, dirs, files in os.walk(base_dir):
         for file in files:
             file_attrs = file.split('.')
-            file_name = file_attrs[0]
 
-            try:
-                file_ext = file_attrs[1]
-            except IndexError:
-                file_ext = None
-
-            obj = OsObject(file_name, file_ext, root.split('/')[-1])
+            obj = OsObject(file_attrs[0], None if len(file_attrs) == 1 else file_attrs[-1], root.split('/')[-1])
             object_list.append(obj)
 
         for dir_ in dirs:
