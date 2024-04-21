@@ -24,14 +24,16 @@ def dir_parser(directory=None):
         base_dir = Path(directory)
 
     if not base_dir.exists():
-        logger.error(f'error - path "{base_dir}" does non exist')
+        logger.error(f'error - path "{base_dir}" does not exist')
         return object_list
 
     for root, dirs, files in os.walk(base_dir):
 
         for file in files:
             file_attrs = file.split('.')
-            obj = OsObject(file_attrs[0], None if len(file_attrs) == 1 else file_attrs[-1], root.split('/')[-1])
+            obj = OsObject(file_attrs[0] if len(file_attrs) == 1 else '.'.join(file_attrs[:-1]),
+                           None if len(file_attrs) == 1 else file_attrs[-1],
+                           root.split('/')[-1])
             logger.info(f'find OS object - {obj}')
             object_list.append(obj)
 
