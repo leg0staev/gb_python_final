@@ -24,7 +24,7 @@ def dir_parser(directory=None):
         base_dir = Path(directory)
 
     if not base_dir.exists():
-        logger.error('error - path does non exist')
+        logger.error(f'error - path "{base_dir}" does non exist')
         return object_list
 
     for root, dirs, files in os.walk(base_dir):
